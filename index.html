@@ -22,15 +22,19 @@
 
   <script>
     const workerUrl = "https://apkdownload.22afed28-f0b2-46d0-8804-c90e25c90bd4.workers.dev/";
+    const downloadBtn = document.getElementById('downloadBtn');
     const statusEl = document.getElementById('status');
-    document.getElementById('downloadBtn').addEventListener('click', () => {
-      statusEl.textContent = "Preparing download…";
+
+    downloadBtn.addEventListener('click', () => {
+      statusEl.textContent = "Your download is starting...";
+      downloadBtn.disabled = true;
       // Use location.href to trigger download
       window.location.href = workerUrl;
       // Fallback after short delay:
       setTimeout(() => {
-        statusEl.textContent = "If download didn't start, please click the button above again.";
-      }, 3000);
+        statusEl.innerHTML = "If the download doesn't start, check your browser's download permissions for this site. <br>If you get a 'parsing error' after downloading, the file may be corrupt; please try again.";
+        downloadBtn.disabled = false;
+      }, 5000);
     });
   </script>
 </body>
