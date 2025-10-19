@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Download APK</title>
+  <style>
+    body { font-family: Arial, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; background:#1e1e2e; color:#fff; }
+    .container { text-align:center; background:#272938; padding:40px 30px; border-radius:12px; box-shadow:0px 8px 20px rgba(0,0,0,0.4); }
+    .btn { display:inline-block; margin-top:20px; padding:14px 28px; font-size:18px; font-weight:600; color:#fff; background:#00c4a7; border:none; border-radius:8px; cursor:pointer; transition: background .3s, transform .2s; }
+    .btn:hover { background:#00a88c; transform: scale(1.05); }
+    .status { margin-top:15px; font-size:14px; opacity:0.85; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Download Our App</h1>
+    <p>Your APK download is ready via a secure link.</p>
+    <button class="btn" id="downloadBtn">📲 Download APK</button>
+    <p class="status" id="status"></p>
+  </div>
+
+  <script>
+    const workerUrl = "https://apkdownload.22afed28-f0b2-46d0-8804-c90e25c90bd4.workers.dev/";
+    const statusEl = document.getElementById('status');
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      statusEl.textContent = "Preparing download…";
+      // Use location.href to trigger download
+      window.location.href = workerUrl;
+      // Fallback after short delay:
+      setTimeout(() => {
+        statusEl.textContent = "If download didn't start, please click the button above again.";
+      }, 3000);
+    });
+  </script>
+</body>
+</html>
